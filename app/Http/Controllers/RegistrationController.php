@@ -32,4 +32,23 @@ class RegistrationController extends Controller
         $data = compact('customers');
         return view('customertable')->with($data);
     }
+
+    public function delete($id){
+        $customers = Customer::find($id);
+        if(!is_null('customers')){
+            $customers->delete();
+        }
+        return redirect('customertable');
+    }
+
+    public function edit($id){
+        $customers = Customer::find($id);
+        if(is_null('customers')){
+            return redirect('customertable');
+        }
+        else{
+            $data = compact('customers');
+            return view('editform')->with($data);
+        }
+    }
 }

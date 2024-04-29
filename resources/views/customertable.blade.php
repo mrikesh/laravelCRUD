@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col-md-12 text-start">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                <a href="{{ route('customer.create') }}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                     Add
-                </button>
+                </button></a>
             </div>
         </div>
         <br />
@@ -36,8 +36,8 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <button class="btn btn-primary">Edit</button>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <a href="{{ route('customer.edit', ['id'=>$customerdata->customer_id]) }}"><button class="btn btn-primary">Edit</button>
+                                    <a href="{{ route('customer.delete', ['id'=>$customerdata->customer_id]) }}"><button class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                             @endforeach

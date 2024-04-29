@@ -11,6 +11,8 @@ Route::get('/', function () {
 //     return view('customertable');
 // });
 
-Route::get('/register',[RegistrationController::class, 'create']);
+Route::get('/register',[RegistrationController::class, 'create'])->name('customer.create');
 Route::post('/register',[RegistrationController::class, 'store']);
 Route::get('/customertable', [RegistrationController::class, 'view']);
+Route::get('/delete/{id}', [RegistrationController::class, 'delete'])->name('customer.delete');
+Route::get('/edit/{id}', [RegistrationController::class, 'edit'])->name('customer.edit');
