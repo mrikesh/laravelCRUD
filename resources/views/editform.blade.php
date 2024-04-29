@@ -19,6 +19,10 @@
             </div>
 
             <div class="form-group">
+                <input type="text" class="form-control" name="address" id="address" placeholder="Address" value="{{ $customers->address }}">
+            </div>
+
+            <div class="form-group">
                 <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ $customers->email }}">
                 <span class="text-danger">
                     @error('email')

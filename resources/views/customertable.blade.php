@@ -8,9 +8,9 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col-md-12 text-start">
-                <a href="{{ route('customer.create') }}"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                    Add
-                </button></a>
+                <a href="{{ route('customer.create') }}"><button type="button" class="btn btn-primary">
+                        Add
+                    </button></a>
             </div>
         </div>
         <br />
@@ -28,20 +28,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             @foreach ($customers as $customerdata)
-                            <tr>
-                                <td>{{ $customerdata->full_name }}</td>
-                                <td>{{ $customerdata->email }}</td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="{{ route('customer.edit', ['id'=>$customerdata->customer_id]) }}"><button class="btn btn-primary">Edit</button>
-                                    <a href="{{ route('customer.delete', ['id'=>$customerdata->customer_id]) }}"><button class="btn btn-danger">Delete</button></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $customerdata->full_name }}</td>
+                                    <td>{{ $customerdata->email }}</td>
+                                    <td>{{ $customerdata->address }}</td>
+                                    <td>
+                                        @if ($customerdata->status == 1)
+                                            <a href=""><span class="badge badge-success">Active</span></a>
+                                        @else
+                                            <a href=""><span class="badge badge-danger">Inactive</span></a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('customer.edit', ['id' => $customerdata->customer_id]) }}"><button
+                                                class="btn btn-primary">Edit</button>
+                                            <a href="{{ route('customer.delete', ['id' => $customerdata->customer_id]) }}"><button
+                                                    class="btn btn-danger">Delete</button></a>
+                                    </td>
+                                </tr>
                             @endforeach
-                        
+
                         </tbody>
                     </table>
                 </div>

@@ -14,17 +14,19 @@ class RegistrationController extends Controller
     public function store(Request $request){
         $request->validate([
             'full_name'=>'required',
+            'address'=>'required',
             'email'=>'required|email',
             'password'=>'required',
         ]);
         
         $customer = new Customer;
         $customer->full_name=$request['full_name'];
+        $customer->address=$request['address'];
         $customer->email=$request['email'];
         $customer->password=md5($request['password']);
         $customer->save();
 
-        return redirect('register');
+        return redirect('customertable');
     }
 
     public function view(){
@@ -54,8 +56,8 @@ class RegistrationController extends Controller
 
     public function update($id, Request $request){
         $customers = Customer::find($id);
-
         $customers->full_name=$request['full_name'];
+        $customers->address=$request['address'];
         $customers->email=$request['email'];
         // $customer->password=md5($request['password']);
         $customers->save();
