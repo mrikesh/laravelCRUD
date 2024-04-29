@@ -51,4 +51,15 @@ class RegistrationController extends Controller
             return view('editform')->with($data);
         }
     }
+
+    public function update($id, Request $request){
+        $customers = Customer::find($id);
+
+        $customers->full_name=$request['full_name'];
+        $customers->email=$request['email'];
+        // $customer->password=md5($request['password']);
+        $customers->save();
+
+        return redirect('customertable');
+    }
 }

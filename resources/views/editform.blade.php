@@ -1,13 +1,13 @@
 @extends('components.main')
 
 @push('title')
-    <title>Edit</title>
+    <title>Update</title>
 @endpush
 
 @section('content')
     <h1 class="text-center">Update Details</h1>
     <div class="container">
-        <form action="/register" method="post">
+        <form action="{{ route('customer.update',['id'=>$customers->customer_id]) }}" method="post">
             @csrf
             <div class="form-group">
                 <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name" value="{{ $customers->full_name }}">

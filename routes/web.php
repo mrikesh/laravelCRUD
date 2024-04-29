@@ -14,5 +14,6 @@ Route::get('/', function () {
 Route::get('/register',[RegistrationController::class, 'create'])->name('customer.create');
 Route::post('/register',[RegistrationController::class, 'store']);
 Route::get('/customertable', [RegistrationController::class, 'view']);
-Route::get('/delete/{id}', [RegistrationController::class, 'delete'])->name('customer.delete');
-Route::get('/edit/{id}', [RegistrationController::class, 'edit'])->name('customer.edit');
+Route::get('/customer/delete/{id}', [RegistrationController::class, 'delete'])->name('customer.delete');
+Route::get('/customer/edit/{id}', [RegistrationController::class, 'edit'])->name('customer.edit');
+Route::post('/customer/update/{id}', [RegistrationController::class, 'update'])->name('customer.update');
