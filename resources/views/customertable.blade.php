@@ -6,6 +6,13 @@
 
 @section('content')
     <div class="container">
+        <form action="" method="get" class="col-9">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="search" name="search" id="" class="form-control" placeholder="Search" value="{{ $search }}">
+                    <button class="btn btn-primary">Search</button>
+            </div>
+        </form>
         <div class="row mt-3">
             <div class="col-md-12 text-start">
                 <a href="{{ route('customer.create') }}"><button type="button" class="btn btn-primary">

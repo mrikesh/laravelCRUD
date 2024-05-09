@@ -7,58 +7,69 @@ use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         return view('registration');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'full_name'=>'required',
-            'address'=>'required',
-            'email'=>'required|email',
-            'password'=>'required',
+            'full_name' => 'required',
+            'address' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
-        
+
         $customer = new Customer;
-        $customer->full_name=$request['full_name'];
-        $customer->address=$request['address'];
-        $customer->email=$request['email'];
-        $customer->password=md5($request['password']);
+        $customer->full_name = $request['full_name'];
+        $customer->address = $request['address'];
+        $customer->email = $request['email'];
+        $customer->password = md5($request['password']);
         $customer->save();
 
         return redirect('customertable');
     }
 
-    public function view(){
-        $customers = Customer::all();
-        $data = compact('customers');
+    public function view(Request $request)
+    {
+        $search = $request['search'] ?? "";
+        if ($search != "") {
+            $customers = Customer::where('full_name', 'LIKE', "%$search%")->orWhere('email', 'LIKE', "%$search%")->get();
+        }
+        else{
+            $customers = Customer::all();
+        }
+        $data = compact('customers', 'search');
         return view('customertable')->with($data);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $customers = Customer::find($id);
-        if(!is_null('customers')){
+        if (!is_null('customers')) {
             $customers->delete();
         }
         return redirect('customertable');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $customers = Customer::find($id);
-        if(is_null('customers')){
+        if (is_null('customers')) {
             return redirect('customertable');
-        }
-        else{
+        } else {
             $data = compact('customers');
             return view('editform')->with($data);
         }
     }
 
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
         $customers = Customer::find($id);
-        $customers->full_name=$request['full_name'];
-        $customers->address=$request['address'];
-        $customers->email=$request['email'];
+        $customers->full_name = $request['full_name'];
+        $customers->address = $request['address'];
+        $customers->email = $request['email'];
         // $customer->password=md5($request['password']);
         $customers->save();
 
